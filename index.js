@@ -97,12 +97,12 @@ function SimpleDebugConsole() {
     };
 
     this.msgToString = function(msg) {
-        var text =  msg.event ? msg.event + ': ' + msg.message : msg.message;
+        var text =  msg.event ? msg.event.toUpperCase() + ': ' + msg.message : msg.message;
         if (msg.source) text += " (" + msg.source + ")";
         return text;
     };
-    
 }
+
 
 // Necessary to use in IridiumMobile
 if (typeof IR === 'object') {

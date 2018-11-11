@@ -54,6 +54,10 @@ function DebugLog() {
     };
     
     this.disable = function (source, event) {
+        if (source == undefined) {
+            return;
+        }
+
         var obj = {};
         if (event) {
             obj[event] = true;
@@ -68,6 +72,10 @@ function DebugLog() {
     };
     
     this.enable = function (source, event) {
+        if (source == undefined) {
+            return;
+        }
+
         var disabled = this.disabledSources[source];
         if (!disabled) {
             return;

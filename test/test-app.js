@@ -20,7 +20,7 @@ _Error('This message will be not displayed!', 'disabled-source');
 _DEBUGGER
     .enable('disabled-source');
 
-_Log('This message will be displayed new!', 'disabled-source');
+_Log('This message will be displayed now!', 'disabled-source');
 _Debug('This message will be displayed now!', 'disabled-source');
 _Error('This message will be displayed now!', 'disabled-source');
 
@@ -29,3 +29,7 @@ _DEBUGGER
 
 _Log('This message will be displayed again!', 'disabled-source');
 _Debug('This message will be not displayed!', 'disabled-source');
+
+_DEBUGGER.disable(undefined, 'all');
+
+console.log(_DEBUGGER.disabledSources);

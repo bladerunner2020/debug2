@@ -30,6 +30,27 @@ _DEBUGGER
 _Log('This message will be displayed again!', 'disabled-source');
 _Debug('This message will be not displayed!', 'disabled-source');
 
-_DEBUGGER.disable(undefined, 'all');
+_DEBUGGER
+    .enable('disabled-source', 'DEBUG')
+    .disable(undefined, 'all')
+    .enable('unexisted');
+
+console.log(_DEBUGGER.disabledSources);
+
+_DEBUGGER
+    .disable('source1', 'DEBUG')
+    .disable('source1', 'ERROR');
+
+console.log(_DEBUGGER.disabledSources);
+
+_DEBUGGER
+    .enable('source1', 'DEBUG')
+    .enable('source1', 'WARNING');
+
+console.log(_DEBUGGER.disabledSources);
+
+_DEBUGGER
+    .enable('source1', 'ERROR')
+    .enable('source1', 'WARNING');
 
 console.log(_DEBUGGER.disabledSources);

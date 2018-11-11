@@ -54,37 +54,38 @@ function DebugLog() {
     };
     
     this.disable = function (source, event) {
-        if (source == undefined) {
-            return;
-        }
+        if (source != undefined) {
+            var disabled = this.disabledSources[source];
+            disabled = disabled ? disabled : {};
 
-        var obj = {};
-        if (event) {
-            obj[event] = true;
-        } else {
-            obj.all = true;
-        }
+            if (event) {
+                disabled[event] = true;
+            } else {
+                disabled = {all: true};
+            }
 
-        this.disabledSources[source] = obj;
+            this.disabledSources[source] = disabled;
+        }
 
         
         return this;
     };
     
     this.enable = function (source, event) {
-        if (source == undefined) {
-            return;
-        }
+        if (source != undefined) {
+            var disabled = this.disabledSources[source];
+            if (disabled) {
+                if (event) {
+                    delete disabled[event];
 
-        var disabled = this.disabledSources[source];
-        if (!disabled) {
-            return;
-        }
+                    if (Object.keys(disabled).length === 0) {
+                        delete this.disabledSources[source];
+                    }
 
-        if (event) {
-            delete disabled[event];
-        } else {
-            delete this.disabledSources[source];
+                } else {
+                    delete this.disabledSources[source];
+                }
+            }
         }
         
         return this;

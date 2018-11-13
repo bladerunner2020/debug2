@@ -127,5 +127,5 @@ exports.SimpleDebugConsole = SimpleDebugConsole;
 // Necessary to use in IridiumMobile
 if ((typeof IR === 'object') && (typeof module === 'object')) {
     module['debug2'] = exports;
-    exports = null;
+    exports = undefined;
 } 

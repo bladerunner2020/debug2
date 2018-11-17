@@ -1,6 +1,6 @@
 {
   "name": "debug2",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "DebugLog for iRidium mobile",
   "main": "index.js",
   "scripts": {

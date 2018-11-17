@@ -81,6 +81,10 @@ function DebugLog() {
         return this;
     };
     
+    this.enableAll = function () {
+        this.disabledSources = {};    
+    };
+    
     this.enable = function (source, event) {
         if (source != undefined) {
             var disabled = this.disabledSources[source];

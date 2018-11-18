@@ -28,6 +28,16 @@ function DebugLog() {
         
         return this;
     };
+    
+    this.removeAllConsoles = function () {
+        for (var i = 0; i < this.debugConsoles.length; i++) {
+            var c = this.debugConsoles[i];
+            if (c.kill) {
+                c.kill();
+            }
+        }
+        this.debugConsoles = [];    
+    };
 
     this.notify = function(msg) {
         for (var i = 0; i < this.debugConsoles.length; i++) {

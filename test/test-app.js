@@ -54,3 +54,6 @@ _DEBUGGER
     .enable('source1', 'WARNING');
 
 console.log(_DEBUGGER.disabledSources);
+
+_DEBUGGER.removeAllConsoles();
+_Log('Should not be displayed');

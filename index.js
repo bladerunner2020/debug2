@@ -50,7 +50,10 @@ function DebugLog() {
 
     this.log = function(event, message, source) {
         var disabled = this.disabledSources[source];
-        if (disabled &&  (disabled.all || (event && disabled[event.toUpperCase()]))) {
+        if (event && event != 'all') {
+            event = event.toUpperCase();
+        }
+        if (disabled &&  (disabled.all || (event && disabled[event]))) {
             return;
         }
 
@@ -78,7 +81,7 @@ function DebugLog() {
             var disabled = this.disabledSources[source];
             disabled = disabled ? disabled : {};
 
-            if (event) {
+            if (event && event != 'all' && event != 'ALL') {
                 disabled[event.toUpperCase()] = true;
             } else {
                 disabled = {all: true};
@@ -100,7 +103,10 @@ function DebugLog() {
             var disabled = this.disabledSources[source];
             if (disabled) {
                 if (event) {
-                    delete disabled[event.toUpperCase()];
+                    if (event != 'all') {
+                        event = event.toUpperCase();
+                    }
+                    delete disabled[event];
 
                     if (Object.keys(disabled).length === 0) {
                         delete this.disabledSources[source];

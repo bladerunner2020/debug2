@@ -1,12 +1,12 @@
 {
   "name": "debug2",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "DebugLog for iRidium mobile",
-  "main": "index.js",
+  "main": "debug2.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Alexander Pivovarov aka balderunner2020 (pivovarov@gmail.com)",
+  "author": "Alexander Pivovarov aka bladerunner2020 (pivovarov@gmail.com)",
   "license": "ISC",
   "devDependencies": {
     "grunt": "^1.0.1",

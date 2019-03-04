@@ -70,6 +70,15 @@ function DebugLog() {
 
         var msg = {event : event, message : message, source : source, timestamp : timestamp};
 
+        if (this.lastMessages) {
+            var lastMsg = this.lastMessages[event];
+            if (lastMsg && lastMsg.message === message && lastMsg.source === source) {
+                return;
+            }
+
+            this.lastMessages[event] = msg;
+        }
+
         this.notify(msg);
     };
     
@@ -86,7 +95,6 @@ function DebugLog() {
 
             this.disabledSources[source] = disabled;
         }
-
         
         return this;
     };
@@ -113,7 +121,14 @@ function DebugLog() {
         
         return this;
     };
-    
+
+    this.disableDuplicates = function() {
+        this.lastMessages = {};
+    }
+
+    this.enableDuplicates = function() {
+        this.lastMessages = undefined;
+    }
 }
 
 function SimpleDebugConsole() {

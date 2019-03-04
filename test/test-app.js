@@ -1,4 +1,4 @@
-var D = require('../index.js');
+var D = require('../debug2.js');
 var _DEBUGGER = D._DEBUGGER;
 var _Log = D._Log;
 var _Error = D._Error;
@@ -35,25 +35,44 @@ _DEBUGGER
     .disable(undefined, 'all')
     .enable('unexisted');
 
-console.log(_DEBUGGER.disabledSources);
-
 _DEBUGGER
     .disable('source1', 'DEBUG')
     .disable('source1', 'ERROR');
 
-console.log(_DEBUGGER.disabledSources);
 
 _DEBUGGER
     .enable('source1', 'DEBUG')
     .enable('source1', 'WARNING');
 
-console.log(_DEBUGGER.disabledSources);
 
 _DEBUGGER
     .enable('source1', 'ERROR')
     .enable('source1', 'WARNING');
 
-console.log(_DEBUGGER.disabledSources);
 
 _DEBUGGER.removeAllConsoles();
 _Log('Should not be displayed');
+
+console.log('');
+console.log('Testing disable/enable duplicates');
+
+_DEBUGGER
+    .addConsole(new SimpleDebugConsole())
+
+_DEBUGGER.disableDuplicates();
+
+_Log('Log - should be displayed only once');
+_Log('Log - should be displayed only once');
+_Error('Error - should be displayed only once');
+_Error('Error - should be displayed only once');
+_Log('Log - should be displayed only once');
+
+_Log('Log - should be displayed only once', 'Test');
+_Log('Log - should be displayed only once'); // should be displayed
+
+_DEBUGGER.enableDuplicates();
+
+_Log('Log - should be displayed');
+_Log('Log - should be displayed');
+_Log('Log - should be displayed');
+

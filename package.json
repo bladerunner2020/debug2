@@ -1,6 +1,6 @@
 {
   "name": "debug2",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "DebugLog for iRidium mobile",
   "main": "debug2.js",
   "scripts": {
@@ -9,7 +9,6 @@
   "author": "Alexander Pivovarov aka bladerunner2020 (pivovarov@gmail.com)",
   "license": "ISC",
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-bump": "^0.8.0"
+    "eslint": "^6.8.0"
   }
 }

@@ -33,12 +33,16 @@ _Debug('This message will be not displayed!', 'disabled-source');
 _DEBUGGER
     .enable('disabled-source', 'DEBUG')
     .disable(undefined, 'all')
-    .enable('unexisted');
+    .enable('non-existed');
+
+
+_Log('Source1.DEBUG: ' + _DEBUGGER.isEnable('source1', 'DEBUG'));
 
 _DEBUGGER
     .disable('source1', 'DEBUG')
     .disable('source1', 'ERROR');
 
+_Log('Source1.DEBUG: ' + _DEBUGGER.isEnable('source1', 'DEBUG'));
 
 _DEBUGGER
     .enable('source1', 'DEBUG')

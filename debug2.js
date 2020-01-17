@@ -1,4 +1,5 @@
 // Module: Debug
+/* globals IR */
 
 var _DEBUGGER = new DebugLog();
 
@@ -14,12 +15,12 @@ var _Log = function(message, source) {
     _DEBUGGER.log('info' , message, source);
 };
 
+// eslint-disable-next-line no-unused-vars
 var _Warning = function(message, source) {
     _DEBUGGER.log('warning' , message, source);
 };
 
 function DebugLog() {
-    var that = this;
     this.debugConsoles = [];
     this.disabledSources = {};
 
@@ -98,6 +99,21 @@ function DebugLog() {
         
         return this;
     };
+
+    this.isEnable = function(source, event) {
+        if (typeof source !== 'undefined') {
+            var disabled = this.disabledSources[source];
+            if (!disabled) {
+                return false;
+            }
+
+            if (event && event !== 'all') {
+                return disabled[event.toUpperCase()];
+            } else {
+                return disabled['all'];    
+            }
+        }
+    };
     
     this.enableAll = function () {
         this.disabledSources = {};    
@@ -124,11 +140,11 @@ function DebugLog() {
 
     this.disableDuplicates = function() {
         this.lastMessages = {};
-    }
+    };
 
     this.enableDuplicates = function() {
         this.lastMessages = undefined;
-    }
+    };
 }
 
 function SimpleDebugConsole() {
@@ -145,25 +161,16 @@ function SimpleDebugConsole() {
 
     this.msgToString = function(msg) {
         var text =  msg.event ? msg.event.toUpperCase() + ': ' + msg.message : msg.message;
-        if (msg.source) text += " (" + msg.source + ")";
+        if (msg.source) text += ' (' + msg.source + ')';
         return text;
     };
 }
 
-
 // Necessary to use in IridiumMobile
-if (typeof IR === 'object') {
-    var exports = {};
+if (typeof IR === 'undefined') {
+    exports._DEBUGGER = _DEBUGGER;
+    exports._Log = _Log;
+    exports._Debug = _Debug;
+    exports._Error = _Error;
+    exports.SimpleDebugConsole = SimpleDebugConsole;
 }
-
-exports._DEBUGGER = _DEBUGGER;
-exports._Log = _Log;
-exports._Debug = _Debug;
-exports._Error = _Error;
-exports.SimpleDebugConsole = SimpleDebugConsole;
-
-// Necessary to use in IridiumMobile
-if ((typeof IR === 'object') && (typeof module === 'object')) {
-    module['debug2'] = exports;
-    exports = undefined;
-} 
